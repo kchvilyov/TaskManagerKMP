@@ -28,7 +28,7 @@ in your IDE’s toolbar or build it directly from the terminal:
   ```
 - on Windows
   ```shell
-  .\gradlew.bat :composeApp:assembleDebug
+  Remove-Item -Recurse -Force "$env:USERPROFILE\.gradle\wrapper\dists\"
   ```
 
 ### Build and Run Desktop (JVM) Application

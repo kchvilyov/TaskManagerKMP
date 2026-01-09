@@ -3,26 +3,26 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
     repositories {
-        google {
-            mavenContent {
-                includeGroupAndSubgroups("androidx")
-                includeGroupAndSubgroups("com.android")
-                includeGroupAndSubgroups("com.google")
-            }
+        // Заменяем google() на зеркало
+        maven {
+            url = uri("https://maven.aliyun.com/repository/google") // Alibaba mirror
+            name = "Aliyun Google Mirror"
         }
-        mavenCentral()
+        maven {
+            url = uri("https://repo1.maven.org/maven2/") // Maven Central
+            name = "MavenCentral"
+        }
         gradlePluginPortal()
     }
 }
 
+// Это важно: не блокировать загрузку из внешних источников
 dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        google {
-            mavenContent {
-                includeGroupAndSubgroups("androidx")
-                includeGroupAndSubgroups("com.android")
-                includeGroupAndSubgroups("com.google")
-            }
+        maven {
+            url = uri("https://maven.aliyun.com/repository/google")
+            name = "Aliyun Google Mirror"
         }
         mavenCentral()
     }
