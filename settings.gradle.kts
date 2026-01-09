@@ -3,20 +3,19 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
     repositories {
-        // Заменяем google() на зеркало
         maven {
-            url = uri("https://maven.aliyun.com/repository/google") // Alibaba mirror
+            url = uri("https://maven.aliyun.com/repository/google")
             name = "Aliyun Google Mirror"
         }
         maven {
-            url = uri("https://repo1.maven.org/maven2/") // Maven Central
-            name = "MavenCentral"
+            url = uri("https://maven.aliyun.com/repository/central")
+            name = "Aliyun Maven Central"
         }
+        mavenCentral()
         gradlePluginPortal()
     }
 }
 
-// Это важно: не блокировать загрузку из внешних источников
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -24,12 +23,12 @@ dependencyResolutionManagement {
             url = uri("https://maven.aliyun.com/repository/google")
             name = "Aliyun Google Mirror"
         }
+        maven {
+            url = uri("https://maven.aliyun.com/repository/central")
+            name = "Aliyun Maven Central"
+        }
         mavenCentral()
     }
-}
-
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
 include(":composeApp")
