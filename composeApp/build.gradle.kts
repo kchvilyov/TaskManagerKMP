@@ -1,6 +1,4 @@
-import org.gradle.kotlin.dsl.implementation
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -30,12 +28,12 @@ kotlin {
 
     jvm()
 
-    js {
-        browser()
-        binaries.executable()
-    }
-
-    // ❌ Закомментировано: не работает без binaryen и GitHub
+    // ❌ Закомментировано: не поддерживается на уровне lifecycle
+    // js {
+    //     browser()
+    //     binaries.executable()
+    // }
+    //
     // @OptIn(ExperimentalWasmDsl::class)
     // wasmJs {
     //     browser()
@@ -54,8 +52,9 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodelCompose)
-            implementation(libs.androidx.lifecycle.runtimeCompose)
+            // ❌ Удалено: несовместимо с JS
+            // implementation(libs.androidx.lifecycle.viewmodelCompose)
+            // implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(projects.shared)
         }
         commonTest.dependencies {
@@ -63,7 +62,7 @@ kotlin {
         }
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
-            implementation(libs.kotlinx.coroutinesSwing) // ✅ Теперь работает
+            implementation(libs.kotlinx.coroutinesSwing)
         }
     }
 }

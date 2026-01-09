@@ -4,6 +4,10 @@ plugins {
     application
 }
 
+repositories {
+    // Удалено: объявлено в settings.gradle.kts
+}
+
 dependencies {
     implementation(libs.ktor.serverCore)
     implementation(libs.ktor.serverNetty)
